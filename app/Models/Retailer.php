@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Stock;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Retailer extends Model
 {
@@ -11,10 +13,14 @@ class Retailer extends Model
 
     public function addStock(Product $product, Stock $stock)
     {
+        // retailer_id (repair)
+        $stock->product_id = $product->id;
+
+        $this->stock()->save($stock);
     }
 
     public function stock()
     {
-        return $this->hasMany($related);
+        return $this->hasMany(Stock::class);
     }
 }

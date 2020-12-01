@@ -11,6 +11,12 @@ class Product extends Model
 
     public function inStock()
     {
-        return false;
+        return $this->stock()->where('in_stock', true)->exists();
+        // return false;
+    }
+
+    public function stock()
+    {
+        return $this->hasMany(Stock::class);
     }
 }
